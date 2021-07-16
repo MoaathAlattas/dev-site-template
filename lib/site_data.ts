@@ -1,13 +1,4 @@
 import fs from 'fs'
-import path from 'path'
-
-async function fetchData() {
-    const API_URL = process.env.API_URL
-    const API_KEY = process.env.API_KEY
-    const API_SITE_ID = process.env.API_SITE_ID
-    const res = await fetch(`${API_URL}/sites/${API_SITE_ID}/data?api_key=${API_KEY}`)
-    return await res.json()
-}
 
 const DATA_CACHE_PATH = './.data'
 
@@ -21,7 +12,11 @@ export default async function siteData() {
     }
 
     if (!cachedData) {
-        const data = await fetchData()
+        const API_URL = process.env.API_URL
+        const API_KEY = process.env.API_KEY
+        const SITE_ID = process.env.SITE_ID
+        const res = await fetch(`${API_URL}/sites/${SITE_ID}/data?api_key=${API_KEY}`)
+        const data = await res.json()
 
         try {
             fs.writeFileSync(DATA_CACHE_PATH,JSON.stringify(data),'utf8')
