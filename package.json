@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "touch .data && rm .data && node_modules/.bin/next dev",
-    "build": "node_modules/.bin/next build && node_modules/.bin/next export",
+    "build": "touch .data && rm .data && node_modules/.bin/next build && node_modules/.bin/next export",
     "start": "node_modules/.bin/next start"
   },
   "dependencies": {
